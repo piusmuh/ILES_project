@@ -1,0 +1,35 @@
+services:
+  - type: web
+    name: iles-backend
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput && python manage.py migrate
+    startCommand: gunicorn config.wsgi:application
+    envVars:
+      - key: DJANGO_DEBUG
+        value: "False"
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: DJANGO_ALLOWED_HOSTS
+        value: ".onrender.com"
+      - key: CORS_ALLOWED_ORIGINS
+        value: "https://iles-frontend.onrender.com"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: iles-db
+          property: connectionString
+
+  - type: web
+    name: iles-frontend
+    runtime: static
+    rootDir: web
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: VITE_API_BASE_URL
+        value: "https://iles-backend.onrender.com/api"
+      - key: VITE_AUTH_BASE_URL
+        value: "https://iles-backend.onrender.com/api/auth"
+
+databases:
+  - name: iles-db

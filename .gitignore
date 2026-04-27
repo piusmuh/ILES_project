@@ -1,0 +1,9 @@
+.venv/
+backend/.env
+web/.env
+backend/db.sqlite3
+backend/staticfiles/
+web/node_modules/
+web/dist/
+__pycache__/
+*.pyc
