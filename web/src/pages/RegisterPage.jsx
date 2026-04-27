@@ -24,8 +24,14 @@ export default function RegisterPage() {
       await register(form);
       toast.success("Account created. Please login.");
       navigate("/login");
-    } catch {
-      toast.error("Registration failed.");
+    } catch (error) {
+      const data = error?.response?.data;
+      const message =
+        (typeof data === "string" && data) ||
+        data?.detail ||
+        Object.values(data || {}).flat().join(" ") ||
+        "Registration failed.";
+      toast.error(message);
     }
   };
 

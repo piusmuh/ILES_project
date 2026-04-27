@@ -28,6 +28,14 @@ class RegisterSerializer(serializers.ModelSerializer):
         validate_password(value)
         return value
 
+    def validate(self, attrs):
+        # Optional unique fields should be stored as NULL, not empty strings,
+        # so users can register without providing these values.
+        for field in ("staff_number", "student_number", "phone_number", "department"):
+            if attrs.get(field) == "":
+                attrs[field] = None if field in ("staff_number", "student_number") else ""
+        return attrs
+
     def create(self, validated_data):
         password = validated_data.pop("password")
         user = User(**validated_data)
