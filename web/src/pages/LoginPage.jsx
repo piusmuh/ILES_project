@@ -23,22 +23,30 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="panel">
-      <h2>Login</h2>
-      <form onSubmit={submit} className="form-grid">
-        <input value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Username" required />
-        <input
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-          type="password"
-          required
-        />
-        <button type="submit">Sign in</button>
-      </form>
-      <p>
-        No account? <Link to="/register">Create one</Link>
-      </p>
+    <div className="auth-wrap">
+      <div className="auth-panel">
+        <h2>Welcome back</h2>
+        <p className="auth-sub">Sign in to your ILES account</p>
+        <form onSubmit={submit} className="form-grid">
+          <input
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder="Username"
+            required
+          />
+          <input
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
+            type="password"
+            required
+          />
+          <button type="submit">Sign in</button>
+        </form>
+        <p>
+          No account? <Link to="/register">Create one</Link>
+        </p>
+      </div>
     </div>
   );
 }
