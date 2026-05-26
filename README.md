@@ -1,6 +1,6 @@
 # Internship Logging & Evaluation System (ILES)
 
-ILES is a full-stack app for internship placements, weekly student logs, supervisor review cycles, evaluations, and notifications.
+ILES is a full-stack app for internship placements, weekly student logs, supervisor review cycles, evaluations and notifications.
 
 ## Tech Stack
 - Backend: Django + Django REST Framework + JWT auth
